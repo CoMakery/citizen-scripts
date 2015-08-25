@@ -15,12 +15,15 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
   gem.name = "citizencode_scripts"
-  gem.homepage = "http://github.com/gleenn/citizencode_scripts"
+  gem.homepage = "http://github.com/citizencode/citizencode_scripts"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "gleenn@gmail.com"
+  gem.summary = %Q{Citizen Code command-line scripts for easy testing and deployment}
+  gem.description = %Q{Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz}
+  gem.email = "glenn@citizencode.io"
   gem.authors = ["Glenn Jahnke"]
+  gem.executables = []
+  gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.require_paths = ["lib"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
