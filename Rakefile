@@ -21,7 +21,6 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz}
   gem.email = "glenn@citizencode.io"
   gem.authors = ["Glenn Jahnke"]
-  gem.executables = []
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ["lib"]
   # dependencies defined in Gemfile
