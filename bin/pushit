@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+git pull --rebase
+bin/rspect
+git push origin master
