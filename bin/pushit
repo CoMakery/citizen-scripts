@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env ruby
 
-git pull --rebase
-bin/rspect
-git push origin master
+system('git pull --rebase')
+system('bin/rspect') &&
+system('git push origin master')

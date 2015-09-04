@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+THOROUGH=true bin/rspec $*
+
+if [ -d "ios" ]; then
+  cd ios && rake spec
+fi
