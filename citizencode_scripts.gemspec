@@ -10,30 +10,18 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Glenn Jahnke"]
+  s.authors = ["Glenn Jahnke", "Bion Johnson"]
   s.date = "2015-09-04"
   s.description = "Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz"
   s.email = "glenn@citizencode.io"
-  s.executables = ["pushit", "todayi"]
+  s.executables = ["citizen"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
   ]
-  s.files = [
-    ".document",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.rdoc",
-    "Rakefile",
-    "VERSION",
-    "bin/pushit",
-    "bin/todayi",
-    "citizencode_scripts.gemspec",
-    "lib/citizencode_scripts.rb",
-    "test/helper.rb",
-    "test/test_citizencode_scripts.rb"
-  ]
+
+  s.files = `git ls-files bin lib *.md *.rdoc LICENSE.txt`.split("\n")
+
   s.homepage = "http://github.com/citizencode/citizencode_scripts"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.4.8"
