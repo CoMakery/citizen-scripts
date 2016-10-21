@@ -2,7 +2,7 @@
 
 require_relative '../lib/citizen_code_scripts'
 
-if ARGV.size == 0 || (script = ARGV[0]) == 'help'
+if ARGV.size == 0
   CitizenCodeScripts::Help.run
 elsif SCRIPTS.keys.include?(script)
   exec(SCRIPTS[script], *ARGV[1 .. -1])
