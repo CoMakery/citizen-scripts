@@ -2,4 +2,4 @@
 
 require 'citizencode_scripts'
 
-CitizenCodeScripts::RSpec.run(ARGV)
+CitizenCodeScripts::KillDbSessions.run(ARGV)
