@@ -1,5 +1,5 @@
 module CitizenCodeScripts; end
 
-require 'citizencode_scripts/base'
+require 'citizen_code_scripts/base'
 
-Dir.glob('citizencode_scripts/**/*.rb').each { |path| require path }
+Dir.glob('citizen_code_scripts/**/*.rb').each { |path| require path }
