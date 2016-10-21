@@ -1,8 +1,4 @@
-class Doctor
-  def self.run(*args)
-    new(*args).run
-  end
-
+class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   def initialize
     @problems = []
   end

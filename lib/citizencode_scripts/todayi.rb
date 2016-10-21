@@ -1,8 +1,4 @@
-class TodayI
-  def self.run(*args)
-    new(*args).run
-  end
-
+class CitizenCode::TodayI < CitizenCodeScripts::Base
   def run
     date_string = Time.now.to_s.split(' ')[0]
     lines = `git log --date=local --oneline --after="#{date_string} 00:00" --before="#{date_string} 23:59"`

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-system('git pull --rebase')
-system('bin/rspect') &&
-system('git push origin master')
+require 'citizencode_scripts'
+
+CitizenCodeScripts::Pushit.run(ARGV)

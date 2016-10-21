@@ -2,4 +2,4 @@
 
 require 'citizencode_scripts'
 
-TodayI.run
+CitizenCodeScripts::TodayI.run(ARGV)

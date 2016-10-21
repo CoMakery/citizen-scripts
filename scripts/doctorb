@@ -2,4 +2,4 @@
 
 require 'citizencode_scripts'
 
-Doctor.run
+CitizenCodeScripts::Doctor.run(ARGV)

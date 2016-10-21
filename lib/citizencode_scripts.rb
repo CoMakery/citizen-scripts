@@ -1,4 +1,6 @@
-#!/usr/bin/env ruby
-
+require 'citizencode_scripts/base'
+require 'citizencode_scripts/rspec'
+require 'citizencode_scripts/pushit'
 require 'citizencode_scripts/doctor'
+require 'citizencode_scripts/begin'
 require 'citizencode_scripts/todayi'
