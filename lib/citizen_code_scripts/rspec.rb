@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Pushit < CitizenCodeScripts::Base
+class CitizenCodeScripts::Rspec < CitizenCodeScripts::Base
   def run
     begin
       load(File.expand_path("./spring", __FILE__))
