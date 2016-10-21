@@ -29,6 +29,10 @@ class CitizenCodeScripts::Base
     puts "Help has not been implemented for #{self}"
   end
 
+  def self.description
+    ""
+  end
+
   def self.run(*args)
     new(*args).run
   end
