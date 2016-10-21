@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'citizencode_scripts'
-
-CitizenCodeScripts::TodayI.run(ARGV)

@@ -4,6 +4,31 @@ require 'fileutils'
 class CitizenCodeScripts::Base
   include FileUtils
 
+  def self.name
+    self
+      .to_s
+      .split('::')
+      .last
+      .gsub(/[A-Z]/, "-\\0")
+      .downcase[1..-1]
+  end
+
+  def self.scripts
+    @scripts ||= {}
+  end
+
+  def self.script_names
+    scripts.keys
+  end
+
+  def self.inherited(sub_class)
+    scripts[sub_class.name] = sub_class
+  end
+
+  def self.help
+    puts "Help has not been implemented for #{self}"
+  end
+
   def self.run(*args)
     new(*args).new
   end

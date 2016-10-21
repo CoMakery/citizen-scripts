@@ -1,23 +1,9 @@
 #! /usr/bin/env ruby
 
-scripts_glob_path = File.expand_path \
-  '../scripts/*',
-  File.dirname(File.realpath(__FILE__))
-
-SCRIPTS = Dir.glob(scripts_glob_path).reduce({}) do |scripts, path|
-  scripts[File.basename(path)] = path
-  scripts
-end
-
-def help
-  puts "Usage: citizen [scriptname]"
-  print "Specify a specific script to run, options are: "
-  puts SCRIPTS.keys.sort.join(', ')
-  exit
-end
+require_relative '../lib/citizencode_scripts'
 
 if ARGV.size == 0 || (script = ARGV[0]) == 'help'
-  help
+  CitizenCodeScripts::Help.run
 elsif SCRIPTS.keys.include?(script)
   exec(SCRIPTS[script], *ARGV[1 .. -1])
 else
