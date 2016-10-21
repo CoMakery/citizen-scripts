@@ -30,7 +30,7 @@ class CitizenCodeScripts::Base
   end
 
   def self.run(*args)
-    new(*args).new
+    new(*args).run
   end
 
   # path to your application root.

@@ -1,5 +1,6 @@
 module CitizenCodeScripts; end
 
-require 'citizen_code_scripts/base'
+require_relative './citizen_code_scripts/base'
 
-Dir.glob('citizen_code_scripts/**/*.rb').each { |path| require path }
+search_path = File.dirname(__FILE__) + '/citizen_code_scripts/**/*.rb'
+Dir.glob(search_path).each { |path| require path }
