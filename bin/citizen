@@ -2,10 +2,14 @@
 
 require_relative '../lib/citizen_code_scripts'
 
+script = ARGV.first
+
 if ARGV.size == 0
   CitizenCodeScripts::Help.run
-elsif SCRIPTS.keys.include?(script)
-  exec(SCRIPTS[script], *ARGV[1 .. -1])
+elsif CitizenCodeScripts::Base.script_names.include?(script)
+  CitizenCodeScripts::Base
+    .scripts[script]
+    .run(*ARGV[1 .. -1])
 else
   puts "Script '#{script}' not recognized"
   help
