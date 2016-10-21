@@ -46,6 +46,11 @@ class Doctor
       command: "which phantomjs",
       remedy: "brew install phantomjs"
 
+    check \
+      name: "envrc",
+      command: "stat .envrc",
+      remedy: "Get your .envrc file from 1password"
+
     report
   end
 
