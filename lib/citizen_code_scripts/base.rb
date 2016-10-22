@@ -4,6 +4,12 @@ require 'fileutils'
 class CitizenCodeScripts::Base
   include FileUtils
 
+  attr_reader :argv
+
+  def initialize(argv = [])
+    @argv = argv
+  end
+
   def self.name
     self
       .to_s
