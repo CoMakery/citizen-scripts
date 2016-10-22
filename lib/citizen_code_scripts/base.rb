@@ -2,11 +2,12 @@ require 'pathname'
 require 'fileutils'
 
 class CitizenCodeScripts::Base
+  include CitizenCodeScripts::Colorize
   include FileUtils
 
   attr_reader :argv
 
-  def initialize(argv = [])
+  def initialize(*argv)
     @argv = argv
   end
 
@@ -32,7 +33,21 @@ class CitizenCodeScripts::Base
   end
 
   def self.help
-    puts "Help has not been implemented for #{self}"
+    msg = <<-HELP
+Help has not been implemented for "#{name}". Please implement a help method like so:
+
+class #{self} < CitizenCodeScripts::Base
+  def self.help
+    <<-EOF
+    My awesome help message here.
+
+    This will be so useful for people.
+    EOF
+  end
+end
+HELP
+
+    puts msg
   end
 
   def self.description
@@ -46,39 +61,13 @@ class CitizenCodeScripts::Base
   # path to your application root.
   APP_ROOT = Pathname.new Dir.pwd
 
-  COLOR_CODES = {
-    black: 30,
-    blue: 34,
-    brown: 33,
-    cyan: 36,
-    dark_gray: 90,
-    green: 32,
-    light_blue: 94,
-    light_cyan: 96,
-    light_gray: 37,
-    light_green: 92,
-    light_purple: 95,
-    light_red: 91,
-    light_yellow: 93,
-    purple: 35,
-    red: 31,
-    white: 97,
-    yellow: 33,
-  }
-
   def system!(*args)
     puts colorize(light_cyan: args.join(" "))
-    system(*args) || abort(colorize(light_red: "\n== Command #{args} failed =="))
+    system(*args) || abort(colorize(:light_red, "\n== Command #{args} failed =="))
   end
 
   def step(name)
-    puts colorize(light_yellow: "\n== #{name} ==")
+    puts colorize(:light_yellow, "\n== #{name} ==")
     yield
-  end
-
-  def colorize(colors_and_strings)
-    colors_and_strings.map do |color, string|
-      "\e[#{COLOR_CODES[color]}m#{string}\e[0m"
-    end.join
   end
 end

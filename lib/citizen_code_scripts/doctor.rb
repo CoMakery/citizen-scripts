@@ -63,7 +63,7 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
     if system "#{command} > /dev/null 2>&1"
       puts 'OK'
     else
-      print red 'f'
+      print colorize(:red, 'f')
       puts %| To fix, run "#{remedy}"|
       @problems << name
     end
@@ -71,13 +71,5 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
 
   def report
     exit @problems.size
-  end
-
-  def red(s)
-    colorize s, 31
-  end
-
-  def colorize(s, code)
-    "\e[#{code}m#{s}\e[0m"
   end
 end
