@@ -9,6 +9,6 @@ class CitizenCodeScripts::Rspec < CitizenCodeScripts::Base
 
     # require 'rspec/core'
     # RSpec::Core::Runner.invoke
-    system('ruby', Gem.bin_path('rspec-core', 'rspec'))
+    system(Gem.bin_path('rspec-core', 'rspec'), *argv)
   end
 end
