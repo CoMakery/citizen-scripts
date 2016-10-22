@@ -1,6 +1,6 @@
 class CitizenCodeScripts::Test < CitizenCodeScripts::Base
   def self.description
-    "Runs all the various tests across all suites for CI/pushit."
+    "Runs all test suites for CI/pushit"
   end
 
   def run

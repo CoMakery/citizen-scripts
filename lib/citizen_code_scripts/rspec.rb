@@ -1,4 +1,8 @@
 class CitizenCodeScripts::Rspec < CitizenCodeScripts::Base
+  def self.description
+    "Runs your RSpec suite"
+  end
+
   def run
     begin
       load(File.expand_path("./spring", __FILE__))

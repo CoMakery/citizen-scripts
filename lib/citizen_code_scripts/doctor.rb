@@ -1,4 +1,8 @@
 class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
+  def self.description
+    "Helps diagnose any problem for $129.95"
+  end
+
   def initialize
     @problems = []
   end
