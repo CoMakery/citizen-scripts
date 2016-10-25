@@ -2,6 +2,11 @@
 
 require_relative '../lib/citizen_code_scripts'
 
+# Require any overrides or additional hooks for citizen here
+Dir.glob(".citizen/scripts/**/*.rb").each do |file|
+  require File.expand_path(file)
+end
+
 script = ARGV.first
 
 if ARGV.size == 0
