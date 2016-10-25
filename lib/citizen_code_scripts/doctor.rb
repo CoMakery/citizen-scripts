@@ -1,6 +1,6 @@
 class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   def self.description
-    "Helps diagnose any problem for $129.95"
+    "Call 1-555-DOCTORB. The 'B' is for 'bargain'."
   end
 
   def initialize
@@ -8,10 +8,7 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def run
-    puts "~~~~Checking the health of your development environment~~~~"
-    puts "======> https://www.youtube.com/watch?v=Ow4K7xQENS8 <======"
-    puts "☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻"
-    puts
+    preamble
 
     check \
       name: "Postgres launchctl script is linked",
@@ -67,6 +64,13 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
       puts %| To fix, run "#{remedy}"|
       @problems << name
     end
+  end
+
+  def preamble
+    puts "~~~~Checking the health of your development environment~~~~"
+    puts "======> https://www.youtube.com/watch?v=Ow4K7xQENS8 <======"
+    puts "☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻"
+    puts
   end
 
   def report
