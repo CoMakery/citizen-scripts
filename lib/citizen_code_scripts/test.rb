@@ -4,7 +4,9 @@ class CitizenCodeScripts::Test < CitizenCodeScripts::Base
   end
 
   def run
-    rspec
+    step "Running test suite" do
+      rspec
+    end
   end
 
   private

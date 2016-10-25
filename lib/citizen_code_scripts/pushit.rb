@@ -1,6 +1,10 @@
 class CitizenCodeScripts::Pushit < CitizenCodeScripts::Base
   def run
-    system('git pull --rebase')
-    CitizenCodeScripts::Test.run && system('git push origin master')
+    CitizenCodeScripts::Update.run
+    CitizenCodeScripts::Test.run
+
+    step "Pushing" do
+      system('git push')
+    end
   end
 end

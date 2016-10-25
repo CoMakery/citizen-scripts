@@ -11,8 +11,9 @@ class CitizenCodeScripts::Rspec < CitizenCodeScripts::Base
 
     require 'bundler/setup'
 
-    # require 'rspec/core'
-    # RSpec::Core::Runner.invoke
-    system(Gem.bin_path('rspec-core', 'rspec'), *argv)
+    step "Running RSpec" do
+      command = [Gem.bin_path('rspec-core', 'rspec')] + argv
+      system!(command.join(" "))
+    end
   end
 end
