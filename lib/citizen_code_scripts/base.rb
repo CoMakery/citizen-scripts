@@ -20,16 +20,27 @@ class CitizenCodeScripts::Base
       .downcase[1..-1]
   end
 
+  def self.inherited(klass)
+    CitizenCodeScripts::Base.script_classes << klass
+  end
+
+  def self.script_classes
+    @script_classes ||= []
+  end
+
   def self.scripts
-    @scripts ||= {}
+    @scripts ||= load_scripts_deferred
+  end
+
+  def self.load_scripts_deferred
+    script_classes.reduce(Hash.new) do |result, klass|
+      result[klass.name] = klass
+      result
+    end
   end
 
   def self.script_names
     scripts.keys
-  end
-
-  def self.inherited(sub_class)
-    scripts[sub_class.name] = sub_class
   end
 
   def self.help
