@@ -75,7 +75,7 @@ HELP
   end
 
   def system!(*args)
-    puts colorize(light_cyan: args.join(" "))
+    puts colorize(:light_cyan, args.join(" "))
     system(*args) || abort(colorize(:light_red, "\n== Command #{args} failed =="))
   end
 
