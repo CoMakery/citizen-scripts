@@ -31,7 +31,6 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
 
   def initialize
     @checks = []
-    @problems = []
   end
 
   def run
@@ -42,8 +41,9 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
 
   def check(**options)
     check = Check.new(options)
+    @checks << check
+
     check.run!
-    @problems += check.problems
   end
 
   private
@@ -126,7 +126,11 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
       remedy: "Get your .envrc file from 1password"
   end
 
+  def problems
+    @checks.map(&:problems).flatten
+  end
+
   def report
-    exit @problems.size
+    exit problems.size
   end
 end
