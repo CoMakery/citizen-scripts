@@ -1,6 +1,14 @@
 module CitizenCodeScripts::Colorize
   extend self
 
+  def self.included(base)
+    colorize = self
+
+    base.class_eval do
+      extend colorize
+    end
+  end
+
   COLOR_CODES = {
     black: 30,
     blue: 34,
