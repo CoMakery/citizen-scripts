@@ -29,14 +29,49 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
     "Call 1-555-DOCTORB. The 'B' is for 'bargain'."
   end
 
-  def initialize
+  def initialize(*args)
+    super
     @checks = []
   end
 
   def run
+    case argv.first
+    when "list"
+      list_default_checks
+    else
+      run_doctor
+    end
+  end
+
+  def self.help
+    help = "doctor - helps you diagnose any setup issues with this application\n"
+
+    {
+      "citizen doctor" => "runs health checks and gives a report",
+      "citizen doctor list" => "prints a list of default checks you can use when "\
+        "overriding doctor checks in your app"
+    }.each do |cmd, description|
+      help += "\n  - #{colorize(:light_blue, cmd)} - #{description}"
+    end
+
+    help
+  end
+
+  def run_doctor
     preamble
     run_checks
     report
+  end
+
+  def list_default_checks
+    puts "These default checks are available for use in your overrides:"
+    puts
+
+    default_checks.each do |name|
+      puts "  - #{colorize(:light_blue, name)}"
+    end
+
+    puts
   end
 
   def check(**options)
@@ -56,18 +91,22 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def run_checks
-    default_checks
+    default_checks.each do |check|
+      send(check)
+    end
   end
 
   def default_checks
-    check_postgres_launchctl
-    check_postgres_running
-    check_postgres_role
-    check_db_migrated
-    check_direnv_installed
-    check_phantomjs_installed
-    check_gemfile_dependencies
-    check_envrc_file_exists
+    %i[
+      check_postgres_launchctl
+      check_postgres_running
+      check_postgres_role
+      check_db_migrated
+      check_direnv_installed
+      check_phantomjs_installed
+      check_gemfile_dependencies
+      check_envrc_file_exists
+    ]
   end
 
   def check_postgres_launchctl
