@@ -1,4 +1,12 @@
 class CitizenCodeScripts::Help < CitizenCodeScripts::Base
+  def self.help
+    "Inception was a lame movie"
+  end
+
+  def self.description
+    "Prints this message out"
+  end
+
   def run
     specific_script = argv[0]
 
