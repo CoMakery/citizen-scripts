@@ -70,7 +70,9 @@ HELP
   end
 
   # path to your application root.
-  APP_ROOT = Pathname.new Dir.pwd
+  def app_root
+    Pathname.new(Dir.pwd)
+  end
 
   def system!(*args)
     puts colorize(light_cyan: args.join(" "))
