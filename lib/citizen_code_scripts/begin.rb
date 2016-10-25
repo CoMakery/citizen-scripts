@@ -26,21 +26,31 @@ module CitizenCodeScripts
   end
 
   class Begin < Base
-    def help
-      puts 'Usage:'
-      puts '  bin/begin [story id] [branch name]'
-
-      puts 'All branch names will be auto-converted to kebab-case, lowercase'
-
-      puts 'Passing story id/branch name as arguments are optional - if they are missing,'
-      puts "you'll be prompted."
-
-      exit
+    def self.description
+      "Starts your Pivotal story and opens a new PR on Github"
     end
 
-    def run(argv)
-      help if argv[0] == 'help' || argv[0] == '-h'
+    def self.help
+      <<-EOF
+citizen begin #{colorize(:light_blue, "[story id] [branch name]")}
 
+Example: $ #{colorize(:light_blue, 'citizen begin "#133717234"')}
+
+This command will start your Pivotal story for you, open a pull
+request on Github, and copy over the Pivotal story description to
+the Github pull request description. As well, any tasks in your
+Pivotal story will automatically become [x] checkbox tasks on the
+Github PR.
+
+* All branch names will be auto-converted to
+  kebab-case, lowercase
+
+* Passing story id/branch name as arguments are optional - if
+  they are missing, you'll be prompted
+EOF
+    end
+
+    def run
       story_id, branch_name = argv
 
       if !command?("hub")
