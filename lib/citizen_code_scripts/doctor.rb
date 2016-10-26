@@ -91,6 +91,10 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def run_checks
+    run_default_checks
+  end
+
+  def run_default_checks
     default_checks.each do |check|
       send(check)
     end
