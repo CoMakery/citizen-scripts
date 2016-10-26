@@ -14,7 +14,13 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
     def run!
       print "Checking: #{name}... "
 
-      if system "#{command} > /dev/null 2>&1"
+      success = if command.respond_to?(:call)
+        command.call
+      else
+        system "#{command} > /dev/null 2>&1"
+      end
+
+      if success
         puts 'OK'
       else
         print colorize(:red, 'f')
