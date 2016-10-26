@@ -1,5 +1,12 @@
 # citizen_code_scripts
 
+## Getting help
+
+You can run `citizen help` at any time for a list of commands.
+
+Running `citizen help [command name]` will print specific help for that
+command.
+
 ## Extending/adding commands to your project
 
 Any files in `.citizen/scripts/**/*.rb` will be automatically required
