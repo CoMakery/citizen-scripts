@@ -1,5 +1,15 @@
 # citizen_code_scripts
 
+Handy scripts for any client project.
+
+## Installation
+
+Add to your project's Gemfile:
+
+```
+gem 'citizen_code_scripts', git: 'git@github.com:citizencode/citizen_code_scripts.git'
+```
+
 ## Getting help
 
 You can run `citizen help` at any time for a list of commands.
