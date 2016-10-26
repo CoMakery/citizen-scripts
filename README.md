@@ -6,7 +6,7 @@ Handy scripts for any client project.
 
 Add to your project's Gemfile:
 
-```
+```ruby
 gem 'citizen_code_scripts', git: 'git@github.com:citizencode/citizen_code_scripts.git'
 ```
 
@@ -34,7 +34,7 @@ a `run` method.
 As an example, here's how you might override the `citizen test` command to
 add ESLint as a step:
 
-```
+```ruby
 class CustomTest < CitizenCodeScripts::Test
   # override the default 'test' command by naming it
   # the same
