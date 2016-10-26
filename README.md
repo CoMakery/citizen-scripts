@@ -1,6 +1,6 @@
 # citizen_code_scripts
 
-## Extending/adding commands
+## Extending/adding commands to your project
 
 Any files in `.citizen/scripts/**/*.rb` will be automatically required
 by the `citizen` command on a per-project basis. Any overrides/extensions
