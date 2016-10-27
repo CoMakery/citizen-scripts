@@ -49,3 +49,5 @@ pkg
 #*.rbc
 
 .ruby-gemset
+
+.idea
