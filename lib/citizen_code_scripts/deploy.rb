@@ -26,15 +26,9 @@ module CitizenCodeScripts
         raise "app not found in citizen.yml for environment #{env}" if app.nil?
 
         fail "Env must be 'staging' or 'prod'" unless env == "staging" || env == "prod"
-        fail %|Git remote "#{env}" not found. Try running "git remote add #{env} git@heroku.com:#{app}.git"| unless remotes.include?(env)
 
         if sha.nil? || sha.empty?
-          if env == "prod"
-            step "Listing staging releases" do
-              system! "heroku releases -r staging"
-            end
-          end
-          fail "SHA must be provided"
+          fail %|SHA must be provided; try something like "heroku releases -r staging" to see SHAs that are on staging|
         end
 
         if source == "circle-ci"
@@ -43,12 +37,8 @@ module CitizenCodeScripts
           end
         end
 
-        step "Deploying to #{env}" do
-          if source == "circle-ci"
-            system! "git push git@heroku.com:#{app}.git $CIRCLE_SHA1:refs/heads/master"
-          else
-            system! "git push #{env} #{sha}:master"
-          end
+        step "Deploying #{sha} to #{app}" do
+          system! "git push git@heroku.com:#{app}.git #{sha}:refs/heads/master"
         end
 
         step "Running migrations" do
@@ -56,12 +46,6 @@ module CitizenCodeScripts
         end
       end
 
-    end
-
-    private
-
-    def remotes
-      `git remote`.split("\n")
     end
   end
 end
