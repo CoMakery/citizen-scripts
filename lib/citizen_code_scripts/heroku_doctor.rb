@@ -1,15 +1,13 @@
 class HerokuDoctor < CitizenCodeScripts::Doctor
-  def self.help
-    <<-TEXT
-      citizen heroku-doctor
+  def self.description
+    <<~TEXT
+      Runs checks against your Heroku servers
     TEXT
   end
 
-  def self.description
-    <<-TEXT
-      citizen heroku-doctor
-
-      Runs checks against your Heroku staging server to ensure it is configured properly
+  def self.help
+    <<~TEXT
+      citizen heroku-doctor #{colorize(:light_blue, "environment")} = #{colorize(:yellow, "staging")}
     TEXT
   end
 
