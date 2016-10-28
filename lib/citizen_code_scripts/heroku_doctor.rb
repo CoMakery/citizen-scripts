@@ -20,7 +20,16 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
     # this one should always be first - it will NEVER pass for the citizen-rails project which is OKAY!
     check_citizen_yml_configured
 
+    check_app_exists(heroku_app_name)
     check_heroku_env_vars_set(env, heroku_app_name)
+  end
+
+  def check_app_exists(heroku_app_name)
+    check(
+      name: "App #{heroku_app_name} exists",
+      command: "cat .git/config | grep git@heroku.com:#{heroku_app_name}.git",
+      remedy: %|"heroku apps:create #{heroku_app_name}" and/or "git remote add staging git@heroku.com:#{heroku_app_name}.git"|
+    )
   end
 
   private
@@ -41,8 +50,8 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
     )
     check(
       name: "Heroku has ENV var for RAILS set to the #{env}",
-      command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep 'production'", # this should change to the env specified
-      remedy: "heroku config:set DEPLOY_TASKS=db:migrate -a #{heroku_app_name}"
+      command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep '#{env}'", # this should change to the env specified
+      remedy: "heroku config:set RAILS_ENV=#{env} -a #{heroku_app_name}"
     )
     check(
       name: "Heroku has necessary ruby buildpack on #{env}",
