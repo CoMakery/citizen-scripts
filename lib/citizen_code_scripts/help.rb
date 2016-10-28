@@ -3,6 +3,10 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
     "Inception was a lame movie"
   end
 
+  def self.help_subcommands
+    {}
+  end
+
   def self.description
     "Prints this message out"
   end
@@ -12,7 +16,7 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
 
     if CitizenCodeScripts::Base.script_names.include?(specific_script)
       script = CitizenCodeScripts::Base.scripts[specific_script]
-      puts script.help
+      puts full_help(script)
     elsif specific_script
       puts colorize(:red, "\"#{specific_script}\" does not exist, cannot display help")
     else
@@ -21,6 +25,12 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
   end
 
   private
+
+  def full_help(script)
+    (script.help || "") + script.help_subcommands.map do |cmd, description|
+      " - #{colorize(:light_blue, cmd)} - #{description}"
+    end.join("\n")
+  end
 
   def basic_usage
     puts "Usage: citizen #{colorize(:light_blue, '[script name]')}"

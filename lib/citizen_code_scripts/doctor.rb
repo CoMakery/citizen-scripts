@@ -50,17 +50,14 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def self.help
-    help = "doctor - helps you diagnose any setup issues with this application\n"
+    "doctor - helps you diagnose any setup issues with this application\n"
+  end
 
+  def self.help_subcommands
     {
       "citizen doctor" => "runs health checks and gives a report",
-      "citizen doctor list" => "prints a list of default checks you can use when "\
-        "overriding doctor checks in your app"
-    }.each do |cmd, description|
-      help += "\n  - #{colorize(:light_blue, cmd)} - #{description}"
-    end
-
-    help
+      "citizen doctor list" => "prints a list of default checks you can use when overriding doctor checks in your app"
+    }
   end
 
   def run_doctor
