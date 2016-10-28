@@ -1,5 +1,6 @@
 require 'pathname'
 require 'fileutils'
+require 'yaml'
 
 class CitizenCodeScripts::Base
   include CitizenCodeScripts::Colorize
@@ -82,5 +83,13 @@ HELP
   def step(name)
     puts colorize(:light_yellow, "\n== #{name} ==")
     yield
+  end
+
+  def app_names
+    YAML.load_file('citizen.yml')['heroku_app_names']
+  end
+
+  def staging_app_name
+    app_names['staging']
   end
 end

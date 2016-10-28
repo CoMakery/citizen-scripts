@@ -10,6 +10,12 @@ Add to your project's Gemfile:
 gem 'citizen_code_scripts', git: 'git@github.com:citizencode/citizen_code_scripts.git'
 ```
 
+## Staging Heroku Setup
+
+```ruby
+heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git -rstaging
+```
+
 ## Getting help
 
 You can run `citizen help` at any time for a list of commands.
