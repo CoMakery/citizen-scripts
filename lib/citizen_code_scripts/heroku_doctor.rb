@@ -32,5 +32,15 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
       command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep 'production'", # this should change to the env specified
       remedy: "heroku config:set DEPLOY_TASKS=db:migrate -a #{heroku_app_name}"
     )
+    check(
+      name: "Heroku has necessary ruby buildpack on #{env}",
+      command: "heroku buildpacks -a #{heroku_app_name} | grep 'https://github.com/heroku/heroku-buildpack-ruby'",
+      remedy: "heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby -a #{heroku_app_name}"
+    )
+    check(
+      name: "Heroku has necessary rake-deploy-tasks buildpack on #{env}",
+      command: "heroku buildpacks -a #{heroku_app_name} | grep 'https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks'",
+      remedy: "heroku buildpacks:add https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks -a #{heroku_app_name}"
+    )
   end
 end
