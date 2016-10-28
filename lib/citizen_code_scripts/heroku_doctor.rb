@@ -12,16 +12,28 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
   end
 
   def run_checks
-    check_heroku_env_vars_set
-  end
-
-  private
-
-  def check_heroku_env_vars_set
     env = argv[0] || "staging"
     heroku_app_name = app_names[env.to_s]
     puts "Checking for environment '#{env}' which is the heroku app named '#{heroku_app_name}'"
     puts
+
+    # this one should always be first - it will NEVER pass for the citizen-rails project which is OKAY!
+    check_citizen_yml_configured
+
+    check_heroku_env_vars_set(env, heroku_app_name)
+  end
+
+  private
+
+  def check_citizen_yml_configured
+    check(
+      name: "The citizen.yml file has been configured properly",
+      command: "! grep 'citizen-rails-staging' citizen.yml",
+      remedy: "Configure your citizen.yml file to have the correct app names set for all your Heroku environments"
+    )
+  end
+
+  def check_heroku_env_vars_set(env, heroku_app_name)
     check(
       name: "Heroku has ENV var for automatic migrations during deploy",
       command: "heroku config:get DEPLOY_TASKS -a #{heroku_app_name} | grep 'db:migrate'",
