@@ -49,9 +49,14 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
       remedy: "heroku config:set DEPLOY_TASKS=db:migrate -a #{heroku_app_name}"
     )
     check(
-      name: "Heroku has ENV var for RAILS set to the #{env}",
-      command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep '#{env}'", # this should change to the env specified
-      remedy: "heroku config:set RAILS_ENV=#{env} -a #{heroku_app_name}"
+      name: "Heroku has ENV var for RAILS set to production",
+      command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep 'production'",
+      remedy: "heroku config:set RAILS_ENV=production -a #{heroku_app_name}"
+    )
+    check(
+      name: "Heroku has the database provisioned",
+      command: "heroku config:get DATABASE_URL -a #{heroku_app_name} | grep '.+'",
+      remedy: "go to https://dashboard.heroku.com/apps/#{heroku_app_name}/resources and add the Heroku Postgress add-on"
     )
     check(
       name: "Heroku has necessary ruby buildpack on #{env}",
