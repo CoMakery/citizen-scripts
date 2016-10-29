@@ -27,7 +27,7 @@ module CitizenCodeScripts
 
   class Begin < Base
     def self.description
-      "Starts your Pivotal story and opens a new PR on Github"
+      "Starts your Pivotal Tracker story and opens a new PR on Github"
     end
 
     def self.help
@@ -36,10 +36,10 @@ citizen begin #{colorize(:light_blue, "[story id] [branch name]")}
 
 Example: $ #{colorize(:light_blue, 'citizen begin "#133717234"')}
 
-This command will start your Pivotal story for you, open a pull
-request on Github, and copy over the Pivotal story description to
+This command will start your Pivotal Tracker story for you, open a pull
+request on Github, and copy over the Pivotal Tracker story description to
 the Github pull request description. As well, any tasks in your
-Pivotal story will automatically become [x] checkbox tasks on the
+Pivotal Tracker story will automatically become [x] checkbox tasks on the
 Github PR.
 
 * All branch names will be auto-converted to

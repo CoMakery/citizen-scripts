@@ -76,12 +76,12 @@ HELP
   end
 
   def system!(*args)
-    puts colorize(:light_cyan, args.join(" "))
-    system(*args) || abort(colorize(:light_red, "\n== Command #{args} failed =="))
+    puts colorize(:command, args.join(" "))
+    system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
   end
 
   def step(name)
-    puts colorize(:light_yellow, "\n== #{name} ==")
+    puts colorize(:info, "\n== #{name} ==")
     yield
   end
 

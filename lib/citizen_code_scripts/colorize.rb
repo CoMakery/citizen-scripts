@@ -27,6 +27,10 @@ module CitizenCodeScripts::Colorize
     red: 31,
     white: 97,
     yellow: 33,
+
+    command: 96,
+    error: 91,
+    info: 93,
   }
 
   def colorize(color, string)
