@@ -55,7 +55,7 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
     )
     check(
       name: "Heroku has the database provisioned",
-      command: "heroku config:get DATABASE_URL -a #{heroku_app_name} | grep '.+'",
+      command: "heroku config:get DATABASE_URL -a #{heroku_app_name} | grep 'postgres://'",
       remedy: "go to https://dashboard.heroku.com/apps/#{heroku_app_name}/resources and add the Heroku Postgress add-on"
     )
     check(
