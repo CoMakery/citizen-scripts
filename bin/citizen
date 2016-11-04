@@ -18,4 +18,9 @@ elsif CitizenCodeScripts::Base.script_names.include?(script)
 else
   puts "Script '#{script}' not recognized"
   CitizenCodeScripts::Help.run
+
+  similar_commands = Levenstein.closest_match(script, CitizenCodeScripts::Base.script_names)
+  puts
+  puts "Did you mean #{similar_commands.map{|c|"`#{c}`"}.join(' or ')} ?"
+  puts
 end
