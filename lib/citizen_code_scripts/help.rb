@@ -24,14 +24,6 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
     end
   end
 
-  private
-
-  def full_help(script)
-    (script.help || "") + script.help_subcommands.map do |cmd, description|
-      " - #{colorize(:light_blue, cmd)} - #{description}"
-    end.join("\n")
-  end
-
   def basic_usage
     puts "Usage: citizen #{colorize(:light_blue, '[script name]')}"
     puts
@@ -47,5 +39,13 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
 
       puts
     end
+  end
+
+  private
+
+  def full_help(script)
+    (script.help || "") + script.help_subcommands.map do |cmd, description|
+      " - #{colorize(:light_blue, cmd)} - #{description}"
+    end.join("\n")
   end
 end
