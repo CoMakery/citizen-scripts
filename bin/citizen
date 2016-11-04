@@ -17,5 +17,5 @@ elsif CitizenCodeScripts::Base.script_names.include?(script)
     .run(*ARGV[1 .. -1])
 else
   puts "Script '#{script}' not recognized"
-  CitizenCodeScripts::Help.new.basic_usage
+  CitizenCodeScripts::Help.run
 end
