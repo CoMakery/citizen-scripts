@@ -23,8 +23,9 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
       if success
         puts 'OK'
       else
-        print colorize(:red, 'f')
-        puts %| To fix, run "#{remedy}"|
+        print colorize(:error, 'F')
+        fix = remedy.respond_to?(:join) ? remedy.join(" ") : remedy
+        puts "\n  To fix: #{fix}\n\n"
 
         problems << name
       end
@@ -32,7 +33,7 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def self.description
-    "Call 1-555-DOCTORB. The 'B' is for 'bargain'."
+    "Checks the health of your development environment"
   end
 
   def initialize(*args)
@@ -61,7 +62,6 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   def run_doctor
-    preamble
     run_checks
     report
   end
@@ -85,13 +85,6 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
   end
 
   private
-
-  def preamble
-    puts "~~~~Checking the health of your development environment~~~~"
-    puts "======> https://www.youtube.com/watch?v=Ow4K7xQENS8 <======"
-    puts "☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻ ☺ ☻"
-    puts
-  end
 
   def run_checks
     run_default_checks
@@ -118,58 +111,58 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
 
   def check_postgres_launchctl
     check \
-      name: "Postgres launchctl script is linked",
+      name: "postgres launchctl script is linked",
       command: "ls -1 ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist",
-      remedy: "ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents"
+      remedy: command("ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents")
   end
 
   def check_postgres_running
     check \
-      name: "Postgres is running",
+      name: "postgres is running",
       command: "psql -l",
-      remedy: "launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+      remedy: command("launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist")
   end
 
   def check_postgres_role
     check \
       name: "postgres role exists",
       command: "psql -U postgres -l",
-      remedy: "createuser --superuser postgres"
+      remedy: command("createuser --superuser postgres")
   end
 
   def check_gemfile_dependencies
     check \
       name: "Gemfile dependencies are up to date",
       command: "bundle check",
-      remedy: "bundle"
+      remedy: command("bundle")
   end
 
   def check_db_migrated
     check \
       name: "DB is migrated",
       command: "source .envrc && rails runner 'ActiveRecord::Migration.check_pending!'",
-      remedy: "rake db:migrate"
+      remedy: command("rake db:migrate")
   end
 
   def check_direnv_installed
     check \
-      name: "Direnv installed",
+      name: "direnv installed",
       command: "which direnv",
-      remedy: "brew install direnv"
+      remedy: command("brew install direnv")
   end
 
   def check_phantomjs_installed
     check \
       name: "PhantomJS installed",
       command: "which phantomjs",
-      remedy: "brew install phantomjs"
+      remedy: command("brew install phantomjs")
   end
 
   def check_envrc_file_exists
     check \
       name: "envrc",
       command: "stat .envrc",
-      remedy: "Get your .envrc file from 1password"
+      remedy: "get your .envrc file from 1password"
   end
 
   def problems
@@ -178,5 +171,9 @@ class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
 
   def report
     exit problems.size
+  end
+
+  def command(s)
+    "run #{colorize :command, s}"
   end
 end

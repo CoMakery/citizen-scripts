@@ -1,8 +1,6 @@
 class HerokuDoctor < CitizenCodeScripts::Doctor
   def self.description
-    <<~TEXT
-      Runs checks against your Heroku servers
-    TEXT
+    "Checks the health of your Heroku config"
   end
 
   def self.help
@@ -12,61 +10,47 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
   end
 
   def run_checks
-    env = argv[0] || "staging"
-    heroku_app_name = app_names[env.to_s]
-    puts "Checking for environment '#{env}' which is the heroku app named '#{heroku_app_name}'"
+    @env = argv[0] || "staging"
+    @heroku_app_name = app_names[@env.to_s]
+
+    puts "Environment: #{@env}"
+    puts "Heroku app:  #{@heroku_app_name}"
     puts
 
     # this one should always be first - it will NEVER pass for the citizen-rails project which is OKAY!
-    check_citizen_yml_configured
-
-    check_app_exists(heroku_app_name)
-    check_heroku_env_vars_set(env, heroku_app_name)
-  end
-
-  def check_app_exists(heroku_app_name)
-    check(
-      name: "App #{heroku_app_name} exists",
-      command: "cat .git/config | grep git@heroku.com:#{heroku_app_name}.git",
-      remedy: %|"heroku apps:create #{heroku_app_name}" and/or "git remote add staging git@heroku.com:#{heroku_app_name}.git"|
-    )
-  end
-
-  private
-
-  def check_citizen_yml_configured
     check(
       name: "The citizen.yml file has been configured properly",
       command: "! grep 'citizen-rails-staging' citizen.yml",
-      remedy: "Configure your citizen.yml file to have the correct app names set for all your Heroku environments"
+      remedy: "configure your citizen.yml file to have the correct app names set for all your Heroku environments"
+    )
+
+    check(
+      name: "app #{@heroku_app_name} exists",
+      command: "cat .git/config | grep git@heroku.com:#{@heroku_app_name}.git",
+      remedy: [command("heroku apps:create #{@heroku_app_name}"), "and/or", command("git remote add staging git@heroku.com:#{@heroku_app_name}.git")]
+    )
+
+    check_env("DEPLOY_TASKS", "db:migrate")
+    check_env("RAILS_ENV", "production")
+    check_env("DATABASE_URL", "postgres://", "go to https://dashboard.heroku.com/apps/#{@heroku_app_name}/resources and add the Heroku Postgress add-on")
+
+    check_buildpack("https://github.com/heroku/heroku-buildpack-ruby")
+    check_buildpack("https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks")
+  end
+
+  def check_env(env_var, value, remedy=nil)
+    check(
+      name: env_var,
+      command: "heroku config:get #{env_var} -a #{@heroku_app_name} | grep '#{value}'",
+      remedy: remedy || command("heroku config:set #{env_var}=#{value} -a #{@heroku_app_name}")
     )
   end
 
-  def check_heroku_env_vars_set(env, heroku_app_name)
+  def check_buildpack(url)
     check(
-      name: "Heroku has ENV var for automatic migrations during deploy",
-      command: "heroku config:get DEPLOY_TASKS -a #{heroku_app_name} | grep 'db:migrate'",
-      remedy: "heroku config:set DEPLOY_TASKS=db:migrate -a #{heroku_app_name}"
-    )
-    check(
-      name: "Heroku has ENV var for RAILS set to production",
-      command: "heroku config:get RAILS_ENV -a #{heroku_app_name} | grep 'production'",
-      remedy: "heroku config:set RAILS_ENV=production -a #{heroku_app_name}"
-    )
-    check(
-      name: "Heroku has the database provisioned",
-      command: "heroku config:get DATABASE_URL -a #{heroku_app_name} | grep 'postgres://'",
-      remedy: "go to https://dashboard.heroku.com/apps/#{heroku_app_name}/resources and add the Heroku Postgress add-on"
-    )
-    check(
-      name: "Heroku has necessary ruby buildpack on #{env}",
-      command: "heroku buildpacks -a #{heroku_app_name} | grep 'https://github.com/heroku/heroku-buildpack-ruby'",
-      remedy: "heroku buildpacks:add https://github.com/heroku/heroku-buildpack-ruby -a #{heroku_app_name}"
-    )
-    check(
-      name: "Heroku has necessary rake-deploy-tasks buildpack on #{env}",
-      command: "heroku buildpacks -a #{heroku_app_name} | grep 'https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks'",
-      remedy: "heroku buildpacks:add https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks -a #{heroku_app_name}"
+      name: url.split("/").last,
+      command: "heroku buildpacks -a #{@heroku_app_name} | grep '#{url}'",
+      remedy: command("heroku buildpacks:add #{url} -a #{@heroku_app_name}")
     )
   end
 end

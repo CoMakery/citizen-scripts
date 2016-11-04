@@ -30,15 +30,17 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
     puts "Specify a specific script to run, options are: "
     puts
 
-    CitizenCodeScripts::Base.scripts.each do |name, script|
-      print "  #{colorize(:light_green, name)}"
-
-      unless script.description.empty?
-        print " - #{colorize(:light_blue, script.description)}"
-      end
-
-      puts
+    names_and_descriptions = CitizenCodeScripts::Base.scripts.map do |name, script|
+      [colorize(:light_green, name), colorize(:light_blue, script.description)]
     end
+
+    padding = names_and_descriptions.map { |name, _| name.length }.max
+
+    names_and_descriptions.each do |name, description|
+      puts "  %-#{padding}s %s" % [name, description]
+    end
+
+    puts
   end
 
   private
