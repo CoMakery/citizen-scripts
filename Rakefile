@@ -14,12 +14,12 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "citizen_code_scripts"
+  gem.name = "citizen-scripts"
   gem.homepage = "http://github.com/citizencode/citizen_code_scripts"
   gem.license = "MIT"
   gem.summary = %Q{Citizen Code command-line scripts for easy testing and deployment}
   gem.description = %Q{Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz}
-  gem.email = "accounts+rubygems@citizencode.io"
+  gem.email = "opensource@citizencode.io"
   gem.authors = ["Glenn Jahnke", "Erik Hanson", "Bion Johnson", "David Balatero"]
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ["lib"]
