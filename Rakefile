@@ -15,7 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
   gem.name = "citizen-scripts"
-  gem.homepage = "http://github.com/citizencode/citizen_code_scripts"
+  gem.homepage = "http://github.com/citizencode/citizen-scripts"
   gem.license = "MIT"
   gem.summary = %Q{Citizen Code command-line scripts for easy testing and deployment}
   gem.description = %Q{Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz}
@@ -47,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "citizen_code_scripts #{version}"
+  rdoc.title = "citizen-scripts #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
