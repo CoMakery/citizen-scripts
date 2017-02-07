@@ -28,7 +28,7 @@ class HerokuDoctor < CitizenCodeScripts::Doctor
 
     check(
       name: "app #{@heroku_app_name} exists",
-      command: "cat .git/config | grep git@heroku.com:#{@heroku_app_name}.git",
+      command: "cat .git/config | egrep -e git@heroku.com:#{@heroku_app_name}.git -e https://git.heroku.com/#{@heroku_app_name}.git",
       remedy: [command("heroku apps:create #{@heroku_app_name}"), "and/or", command("git remote add staging git@heroku.com:#{@heroku_app_name}.git")]
     )
 
