@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Help < CitizenCodeScripts::Base
+class CitizenScripts::Help < CitizenScripts::Base
   def self.help
     "Inception was a lame movie"
   end
@@ -14,8 +14,8 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
   def run
     specific_script = argv[0]
 
-    if CitizenCodeScripts::Base.script_names.include?(specific_script)
-      script = CitizenCodeScripts::Base.scripts[specific_script]
+    if CitizenScripts::Base.script_names.include?(specific_script)
+      script = CitizenScripts::Base.scripts[specific_script]
       puts full_help(script)
     elsif specific_script
       puts colorize(:red, "\"#{specific_script}\" does not exist, cannot display help")
@@ -38,7 +38,7 @@ class CitizenCodeScripts::Help < CitizenCodeScripts::Base
     puts "Specify a specific script to run, options are: "
     puts
 
-    names_and_descriptions = CitizenCodeScripts::Base.scripts.map do |name, script|
+    names_and_descriptions = CitizenScripts::Base.scripts.map do |name, script|
       [colorize(:light_green, name), colorize(:light_blue, script.description)]
     end
 

@@ -1,4 +1,4 @@
-module CitizenCodeScripts::Colorize
+module CitizenScripts::Colorize
   extend self
 
   def self.included(base)

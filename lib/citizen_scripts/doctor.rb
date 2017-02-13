@@ -1,6 +1,6 @@
-class CitizenCodeScripts::Doctor < CitizenCodeScripts::Base
+class CitizenScripts::Doctor < CitizenScripts::Base
   class Check
-    include CitizenCodeScripts::Colorize
+    include CitizenScripts::Colorize
 
     attr_reader :name, :command, :remedy, :problems
 

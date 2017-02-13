@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require_relative '../lib/citizen_code_scripts'
+require_relative '../lib/citizen_scripts'
 
 # Require any overrides or additional hooks for citizen here
 Dir.glob(".citizen/scripts/**/*.rb").each do |file|
@@ -10,16 +10,16 @@ end
 script = ARGV.first
 
 if ARGV.size == 0
-  CitizenCodeScripts::Help.run
-elsif CitizenCodeScripts::Base.script_names.include?(script)
-  CitizenCodeScripts::Base
+  CitizenScripts::Help.run
+elsif CitizenScripts::Base.script_names.include?(script)
+  CitizenScripts::Base
     .scripts[script]
     .run(*ARGV[1 .. -1])
 else
   puts "Script '#{script}' not recognized"
-  CitizenCodeScripts::Help.run
+  CitizenScripts::Help.run
 
-  similar_commands = Levenstein.closest_match(script, CitizenCodeScripts::Base.script_names)
+  similar_commands = Levenstein.closest_match(script, CitizenScripts::Base.script_names)
   puts
   puts "Did you mean #{similar_commands.map{|c|"`#{c}`"}.join(' or ')} ?"
   puts

@@ -1,4 +1,4 @@
-class CitizenCodeScripts::KillDbSessions < CitizenCodeScripts::Base
+class CitizenScripts::KillDbSessions < CitizenScripts::Base
   def self.description
     "Kills active Postgres sessions"
   end

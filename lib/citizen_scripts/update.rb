@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Update < CitizenCodeScripts::Base
+class CitizenScripts::Update < CitizenScripts::Base
   def self.help
     <<-EOF
 citizen update

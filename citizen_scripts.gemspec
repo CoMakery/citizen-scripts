@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Glenn Jahnke", "Erik Hanson", "Bion Johnson", "David Balatero"]
   s.date = "2016-11-10"
-  s.description = "Citizen Code tools for easy building, testing, and deploying RoR/Android/iOS apps into teh cloudz"
+  s.description = "Handy tools for building, testing, and deploying apps, especially those based on Citizen Rails"
   s.email = "opensource@citizencode.io"
   s.executables = ["citizen"]
   s.extra_rdoc_files = [
@@ -30,23 +30,23 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/citizen",
-    "citizen-scripts.gemspec",
+    "citizen_scripts.gemspec",
     "citizen.yml",
-    "citizen_code_scripts.gemspec",
-    "lib/citizen_code_scripts.rb",
-    "lib/citizen_code_scripts/base.rb",
-    "lib/citizen_code_scripts/begin.rb",
-    "lib/citizen_code_scripts/colorize.rb",
-    "lib/citizen_code_scripts/doctor.rb",
-    "lib/citizen_code_scripts/help.rb",
-    "lib/citizen_code_scripts/heroku_doctor.rb",
-    "lib/citizen_code_scripts/kill_db_sessions.rb",
-    "lib/citizen_code_scripts/levenstein.rb",
-    "lib/citizen_code_scripts/pushit.rb",
-    "lib/citizen_code_scripts/rspec.rb",
-    "lib/citizen_code_scripts/test.rb",
-    "lib/citizen_code_scripts/todayi.rb",
-    "lib/citizen_code_scripts/update.rb",
+    "citizen_scripts.gemspec",
+    "lib/citizen_scripts.rb",
+    "lib/citizen_scripts/base.rb",
+    "lib/citizen_scripts/begin.rb",
+    "lib/citizen_scripts/colorize.rb",
+    "lib/citizen_scripts/doctor.rb",
+    "lib/citizen_scripts/help.rb",
+    "lib/citizen_scripts/heroku_doctor.rb",
+    "lib/citizen_scripts/kill_db_sessions.rb",
+    "lib/citizen_scripts/levenstein.rb",
+    "lib/citizen_scripts/pushit.rb",
+    "lib/citizen_scripts/rspec.rb",
+    "lib/citizen_scripts/test.rb",
+    "lib/citizen_scripts/todayi.rb",
+    "lib/citizen_scripts/update.rb",
     "spec/passing_spec.rb",
     "spec/spec_helper.rb"
   ]

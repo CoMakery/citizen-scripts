@@ -19,6 +19,15 @@ You can run `citizen help` at any time for a list of commands.
 Running `citizen help [command name]` will print specific help for that
 command.
 
+## Commands
+
+`citizen doctor` will run a bunch of checks to make sure all the project dependencies are met
+
+`citizen promote` will promote staging to production and run migrations on production
+
+`citizen update` will pull from git, bundle if necessary, migrate the DB if necessary, remove old logs, and restart Rails
+
+
 ## Extending/adding commands to your project
 
 Any files in `.citizen/scripts/**/*.rb` will be automatically required
@@ -30,14 +39,14 @@ can be added in that directory.
 If you have a custom command you'd like to add, just put it in
 `.citizen/scripts/custom_command.rb`
 
-Each command needs to subclass `CitizenCodeScripts::Base` and implement
+Each command needs to subclass `CitizenScripts::Base` and implement
 a `run` method.
 
 As an example, here's how you might override the `citizen test` command to
 add ESLint as a step:
 
 ```ruby
-class CustomTest < CitizenCodeScripts::Test
+class CustomTest < CitizenScripts::Test
   # override the default 'test' command by naming it
   # the same
   def self.name
@@ -46,7 +55,7 @@ class CustomTest < CitizenCodeScripts::Test
 
   def run
     # Other scripts can be reused by calling .run
-    CitizenCodeScripts::Rspec.run
+    CitizenScripts::Rspec.run
 
     # Adding a custom step to run eslint after RSpec runs
     step "Running eslint" do
@@ -61,7 +70,7 @@ end
 Create a file called `.citizen/scripts/doctor.rb`, and as an example:
 
 ```ruby
-class Doctor < CitizenCodeScripts::Doctor
+class Doctor < CitizenScripts::Doctor
   def run_checks
     # Use built-in default checks, if still desired
     run_default_checks
@@ -88,7 +97,7 @@ run `citizen doctor list`. Then, create a `.citizen/scripts/doctor.rb`
 file that looks something like this:
 
 ```ruby
-class Doctor < CitizenCodeScripts::Doctor
+class Doctor < CitizenScripts::Doctor
   def run_checks
     # Only run these two defaults
     check_envrc_file_exists

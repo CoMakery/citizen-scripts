@@ -1,7 +1,7 @@
 require 'json'
 require 'tempfile'
 
-module CitizenCodeScripts
+module CitizenScripts
   class Pivotal
     attr_reader :token
 

@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Test < CitizenCodeScripts::Base
+class CitizenScripts::Test < CitizenScripts::Base
   def self.description
     "Runs all test suites for CI/pushit"
   end
@@ -12,6 +12,6 @@ class CitizenCodeScripts::Test < CitizenCodeScripts::Base
   private
 
   def rspec
-    CitizenCodeScripts::Rspec.run
+    CitizenScripts::Rspec.run
   end
 end

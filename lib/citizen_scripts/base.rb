@@ -2,8 +2,8 @@ require 'pathname'
 require 'fileutils'
 require 'yaml'
 
-class CitizenCodeScripts::Base
-  include CitizenCodeScripts::Colorize
+class CitizenScripts::Base
+  include CitizenScripts::Colorize
   include FileUtils
 
   attr_reader :argv
@@ -22,7 +22,7 @@ class CitizenCodeScripts::Base
   end
 
   def self.inherited(klass)
-    CitizenCodeScripts::Base.script_classes << klass
+    CitizenScripts::Base.script_classes << klass
   end
 
   def self.script_classes
@@ -48,7 +48,7 @@ class CitizenCodeScripts::Base
     msg = <<-HELP
 Help has not been implemented for "#{name}". Please implement a help method like so:
 
-class #{self} < CitizenCodeScripts::Base
+class #{self} < CitizenScripts::Base
   def self.help
     <<-EOF
     My awesome help message here.

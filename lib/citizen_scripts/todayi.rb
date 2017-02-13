@@ -1,4 +1,4 @@
-class CitizenCodeScripts::TodayI < CitizenCodeScripts::Base
+class CitizenScripts::TodayI < CitizenScripts::Base
   def self.help
     <<-EOF
 citizen today-i

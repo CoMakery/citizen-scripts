@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Rspec < CitizenCodeScripts::Base
+class CitizenScripts::Rspec < CitizenScripts::Base
   def self.description
     "Runs your RSpec suite"
   end

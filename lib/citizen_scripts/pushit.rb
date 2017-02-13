@@ -1,4 +1,4 @@
-class CitizenCodeScripts::Pushit < CitizenCodeScripts::Base
+class CitizenScripts::Pushit < CitizenScripts::Base
   def self.description
     "Pulls code, runs test, pushes your code"
   end
@@ -13,8 +13,8 @@ EOF
   end
 
   def run
-    CitizenCodeScripts::Update.run
-    CitizenCodeScripts::Test.run
+    CitizenScripts::Update.run
+    CitizenScripts::Test.run
 
     step "Pushing" do
       system('git push')

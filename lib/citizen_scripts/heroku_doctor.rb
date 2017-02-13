@@ -1,6 +1,6 @@
 require_relative './doctor'
 
-class HerokuDoctor < CitizenCodeScripts::Doctor
+class HerokuDoctor < CitizenScripts::Doctor
   def self.description
     "Checks the health of your Heroku config"
   end
