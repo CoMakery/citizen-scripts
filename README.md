@@ -1,20 +1,16 @@
-# citizen_code_scripts
+# citizen-scripts
 
-Handy scripts for any client project.
+Handy scripts for developing. Initially built for projects based on [Citizen Rails](https://github.com/citizencode/citizen-rails),
+but hopefully useful for other projects as well. 
 
 ## Installation
 
 Add to your project's Gemfile:
 
 ```ruby
-gem 'citizen_code_scripts', git: 'git@github.com:citizencode/citizen_code_scripts.git'
+gem 'citizen-scripts'
 ```
 
-## Staging Heroku Setup
-
-```ruby
-heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git -rstaging
-```
 
 ## Getting help
 

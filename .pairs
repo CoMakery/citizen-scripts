@@ -1,17 +1,11 @@
 pairs:
   eh: Erik Hanson; erik
-  hw: Harlan T Wood; harlan
-  ac: Alex Chaffee; alex
-  nt: Noah Thorp; noah
-  jm: Jacob Maine; jmaine
-  js: Jay Sweet; jay
-  cm: Clayton Meador; clay
-  mg: Mike Grafton; mike
+  erik: Erik Hanson
   hm: Heather Moore; heather
-  dd: Duke Dorje; duke
-  rh: Rob Hanlon; rob
+  heather: Heather Moore
   db: David Balatero; dbalatero
+  david: David Balatero
   bj: Bion Johnson; bion
-  gj: Glenn Jahnke; glenn
+  bion: Bion Johnson
 email:
   domain: citizencode.io
