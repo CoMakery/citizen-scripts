@@ -41,14 +41,18 @@ EOF
   end
 
   def update_db
-    step "Updating database" do
-      system! 'rake db:migrate' if rails?
+    if rails?
+      step "Updating database" do
+        system! 'rake db:migrate'
+      end
     end
   end
 
   def remove_old_logs
-    step "Removing old logs and tempfiles" do
-      system! 'rake log:clear tmp:clear'
+    if rails?
+      step "Removing old logs and tempfiles" do
+        system! 'rake log:clear tmp:clear'
+      end
     end
   end
 
