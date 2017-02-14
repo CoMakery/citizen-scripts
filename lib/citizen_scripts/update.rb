@@ -42,7 +42,7 @@ EOF
 
   def update_db
     step "Updating database" do
-      system! 'rake db:migrate'
+      system! 'rake db:migrate' if rails?
     end
   end
 
