@@ -16,7 +16,7 @@ EOF
     install_dependencies
     update_db
     remove_old_logs
-    restart_rails
+    restart_servers
   end
 
   private
@@ -29,8 +29,14 @@ EOF
 
   def install_dependencies
     step "Installing dependencies" do
-      system! 'gem install bundler --conservative'
-      system('bundle check') || system!('bundle install')
+      if bundler?
+        system! 'gem install bundler --conservative'
+        system('bundle check') || system!('bundle install')
+      end
+
+      if node_js?
+        system! "npm install"
+      end
     end
   end
 
@@ -44,6 +50,10 @@ EOF
     step "Removing old logs and tempfiles" do
       system! 'rake log:clear tmp:clear'
     end
+  end
+
+  def restart_servers
+    restart_rails if rails?
   end
 
   def restart_rails

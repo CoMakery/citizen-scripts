@@ -85,6 +85,18 @@ HELP
     script.run(*args)
   end
 
+  def rails?
+    File.exist?("config/application.rb")
+  end
+
+  def bundler?
+    File.exist?("Gemfile")
+  end
+
+  def node_js?
+    File.exist?("package.json")
+  end
+
   def system!(*args)
     puts colorize(:command, args.join(" "))
     system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
