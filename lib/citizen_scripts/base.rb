@@ -75,6 +75,16 @@ HELP
     Pathname.new(Dir.pwd)
   end
 
+  def run_script(name, *args)
+    script = CitizenScripts::Base.scripts[name.to_s]
+
+    if script.nil?
+      raise "Could not find script with name #{name.inspect} to run"
+    end
+
+    script.run(*args)
+  end
+
   def system!(*args)
     puts colorize(:command, args.join(" "))
     system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))

@@ -13,8 +13,8 @@ EOF
   end
 
   def run
-    CitizenScripts::Update.run
-    CitizenScripts::Test.run
+    run_script :update
+    run_script :test
 
     step "Pushing" do
       system('git push')
