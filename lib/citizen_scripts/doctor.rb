@@ -98,14 +98,15 @@ class CitizenScripts::Doctor < CitizenScripts::Base
 
   def default_checks
     %i[
+      check_envrc_file_exists
+      check_direnv_installed
+      check_gemfile_dependencies
       check_postgres_launchctl
       check_postgres_running
       check_postgres_role
+      check_db_exists
       check_db_migrated
-      check_direnv_installed
       check_phantomjs_installed
-      check_gemfile_dependencies
-      check_envrc_file_exists
     ]
   end
 
@@ -137,6 +138,18 @@ class CitizenScripts::Doctor < CitizenScripts::Base
       remedy: command("bundle")
   end
 
+  def check_db_exists
+    check \
+      name: "Development database exists",
+      command: "source .envrc && rails runner -e development 'ActiveRecord::Base.connection'",
+      remedy: command("rake db:setup")
+
+    check \
+      name: "Test database exists",
+      command: "source .envrc && rails runner -e test 'ActiveRecord::Base.connection'",
+      remedy: command("rake db:setup")
+  end
+
   def check_db_migrated
     check \
       name: "DB is migrated",
@@ -162,7 +175,7 @@ class CitizenScripts::Doctor < CitizenScripts::Base
     check \
       name: "envrc",
       command: "stat .envrc",
-      remedy: "get your .envrc file from 1password"
+      remedy: command("cp .envrc.sample .envrc")
   end
 
   def problems
