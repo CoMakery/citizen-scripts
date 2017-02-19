@@ -32,12 +32,25 @@ class HerokuDoctor < CitizenScripts::Doctor
       remedy: [command("heroku apps:create #{@heroku_app_name}"), "and/or", command("git remote add staging git@heroku.com:#{@heroku_app_name}.git")]
     )
 
+    check_remote("prod")
+    check_remote("staging")
+
     check_env("DEPLOY_TASKS", "db:migrate")
     check_env("RAILS_ENV", "production")
     check_env("DATABASE_URL", "postgres://", "go to https://dashboard.heroku.com/apps/#{@heroku_app_name}/resources and add the Heroku Postgress add-on")
 
     check_buildpack("https://github.com/heroku/heroku-buildpack-ruby")
     check_buildpack("https://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks")
+  end
+
+  private
+
+  def check_remote(remote)
+    check(
+      name: %|Remote "#{remote}" exists|,
+      command: "git remote | grep #{remote}",
+      remedy: "heroku git:remote -a #{@heroku_app_name} -r #{remote}"
+    )
   end
 
   def check_env(env_var, value, remedy=nil)

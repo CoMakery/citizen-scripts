@@ -111,7 +111,19 @@ HELP
     YAML.load_file('citizen.yml')['heroku_app_names']
   end
 
-  def staging_app_name
-    app_names['staging']
+  def heroku_app_name(remote)
+    app_names[remote.to_s]
+  end
+
+  def heroku(command, remote:)
+    validate_heroku_remote(remote)
+    system! "heroku #{command} -r #{remote}"
+  end
+
+  private
+
+  def validate_heroku_remote(remote)
+    raise "Missing remote" if remote.nil?
+    raise "Unknown remote" unless %w[staging prod].include?(remote.to_s)
   end
 end
