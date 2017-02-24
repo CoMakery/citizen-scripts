@@ -31,7 +31,7 @@ EOF
     step "Installing dependencies" do
       if bundler?
         system! 'gem install bundler --conservative'
-        system('bundle check') || system!('bundle install')
+        system! 'bundle install'
       end
 
       if node_js?
