@@ -173,9 +173,16 @@ class CitizenScripts::Doctor < CitizenScripts::Base
 
   def check_envrc_file_exists
     check \
-      name: "envrc",
+      name: ".envrc file exists",
       command: "stat .envrc",
       remedy: command("cp .envrc.sample .envrc")
+  end
+
+  def check_env_file_exists
+    check \
+      name: ".env file exists (for 'heroku local')",
+      command: "stat .env",
+      remedy: command("ln -s .envrc .env")
   end
 
   def problems
