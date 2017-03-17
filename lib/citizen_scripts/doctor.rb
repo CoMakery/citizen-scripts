@@ -99,6 +99,7 @@ class CitizenScripts::Doctor < CitizenScripts::Base
   def default_checks
     %i[
       check_envrc_file_exists
+      check_env_file_exists
       check_direnv_installed
       check_gemfile_dependencies
       check_postgres_launchctl
