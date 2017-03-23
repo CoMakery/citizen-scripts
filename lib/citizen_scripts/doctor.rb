@@ -155,7 +155,7 @@ class CitizenScripts::Doctor < CitizenScripts::Base
     check \
       name: "DB is migrated",
       command: "source .envrc && rails runner 'ActiveRecord::Migration.check_pending!'",
-      remedy: command("rake db:migrate")
+      remedy: command("rake db:migrate db:test:prepare")
   end
 
   def check_direnv_installed
