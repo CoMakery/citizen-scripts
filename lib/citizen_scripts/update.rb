@@ -30,7 +30,7 @@ EOF
   def install_dependencies
     step "Installing dependencies" do
       if bundler?
-        system! 'gem install bundler --conservative'
+        system! 'command -v bundler > /dev/null || gem install bundler --conservative'
         system! 'bundle install'
       end
 
