@@ -34,8 +34,8 @@ EOF
         system! 'bundle install'
       end
 
-      if node_js?
-        system! "npm install"
+      if yarn?
+        system! "yarn install"
       end
     end
   end

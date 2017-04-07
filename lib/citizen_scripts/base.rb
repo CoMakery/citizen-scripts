@@ -93,8 +93,8 @@ HELP
     File.exist?("Gemfile")
   end
 
-  def node_js?
-    File.exist?("package.json")
+  def yarn?
+    File.exist?("yarn.lock")
   end
 
   def system!(*args)
