@@ -97,6 +97,12 @@ HELP
     File.exist?("yarn.lock")
   end
 
+  def ci?
+    # Set by Circle automatically:
+    # https://circleci.com/docs/1.0/environment-variables/#basics
+    ENV.has_key?('CI')
+  end
+
   def system!(*args)
     puts colorize(:command, args.join(" "))
     system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
