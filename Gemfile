@@ -6,7 +6,4 @@ group :development do
   gem 'pry'
   gem 'pry-stack_explorer'
   gem "rdoc", "~> 3.12"
-  gem "rspec"
-  gem "shoulda", ">= 0"
-  gem "simplecov", ">= 0"
 end
