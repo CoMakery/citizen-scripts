@@ -31,7 +31,7 @@ EOF
     step "Installing dependencies" do
       if bundler?
         system! 'command -v bundler > /dev/null || gem install bundler --conservative'
-        system! 'bundle install'
+        system! 'bundle install --quiet'
       end
 
       if yarn?

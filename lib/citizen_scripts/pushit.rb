@@ -17,7 +17,7 @@ EOF
     run_script :test
 
     step "Pushing" do
-      system('git push')
+      system('git push origin HEAD')
     end
   end
 end
