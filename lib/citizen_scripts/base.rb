@@ -104,8 +104,12 @@ HELP
   end
 
   def shell!(*args)
+    shell(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
+  end
+
+  def shell(*args)
     puts colorize(:command, args.join(" "))
-    system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
+    system(*args)
   end
 
   def step(name)
