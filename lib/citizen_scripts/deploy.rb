@@ -16,7 +16,7 @@ EOF
     argv.shift
 
     if argv.empty?
-      STDERR.puts 'Usage: citizen deploy staging|production|other [git ref] [heroku base name]'
+      STDERR.puts 'Usage: citizen deploy staging|production|other [git ref] [heroku base app name]'
       exit 1
     end
 
