@@ -13,7 +13,7 @@ class CitizenScripts::Rspec < CitizenScripts::Base
 
     step "Running RSpec" do
       command = ['bundle', 'exec', 'rspec', *argv]
-      system!(command.join(" "))
+      shell!(command.join(" "))
     end
   end
 end

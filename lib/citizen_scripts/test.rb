@@ -13,15 +13,15 @@ class CitizenScripts::Test < CitizenScripts::Base
 
   def rspec
     check_clean
-    system! "bin/rubocop"
-    system! "yarn lint"
+    shell! "bin/rubocop"
+    shell! "yarn lint"
     check_clean
-    system! "bundle exec brakeman --exit-on-warn --quiet > /dev/null"
-    system! "bundle exec rails_best_practices ."
+    shell! "bundle exec brakeman --exit-on-warn --quiet > /dev/null"
+    shell! "bundle exec rails_best_practices ."
     CitizenScripts::Rspec.run
   end
 
   def check_clean
-    system! "if [[ $(git status --porcelain) ]]; then echo 'Please stash or commit changes first\n' && exit 1; fi"
+    shell! "if [[ $(git status --porcelain) ]]; then echo 'Please stash or commit changes first\n' && exit 1; fi"
   end
 end

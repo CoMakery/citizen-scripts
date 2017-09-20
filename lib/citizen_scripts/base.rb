@@ -103,7 +103,7 @@ HELP
     ENV.has_key?('CI')
   end
 
-  def system!(*args)
+  def shell!(*args)
     puts colorize(:command, args.join(" "))
     system(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
   end
@@ -123,7 +123,7 @@ HELP
 
   def heroku(command, remote:)
     validate_heroku_remote(remote)
-    system! "heroku #{command} -r #{remote}"
+    shell! "heroku #{command} -r #{remote}"
   end
 
   private

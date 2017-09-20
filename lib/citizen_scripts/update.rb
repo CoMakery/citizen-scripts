@@ -23,19 +23,19 @@ EOF
 
   def pull_git
     step "Pulling from git" do
-      system! "git pull --rebase"
+      shell! "git pull --rebase"
     end
   end
 
   def install_dependencies
     step "Installing dependencies" do
       if bundler?
-        system! 'command -v bundler > /dev/null || gem install bundler --conservative'
-        system! 'bundle install --quiet'
+        shell! 'command -v bundler > /dev/null || gem install bundler --conservative'
+        shell! 'bundle install --quiet'
       end
 
       if yarn?
-        system! "yarn install"
+        shell! "yarn install"
       end
     end
   end
@@ -43,7 +43,7 @@ EOF
   def update_db
     if rails?
       step "Updating database" do
-        system! 'rake db:migrate db:test:prepare'
+        shell! 'rake db:migrate db:test:prepare'
       end
     end
   end
@@ -51,7 +51,7 @@ EOF
   def remove_old_logs
     if rails?
       step "Removing old logs and tempfiles" do
-        system! 'rake log:clear tmp:clear'
+        shell! 'rake log:clear tmp:clear'
       end
     end
   end
