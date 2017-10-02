@@ -14,10 +14,17 @@ EOF
 
   def run
     run_script :update
-    run_script :test
+    check_clean
+    run_script :checks
+    check_clean
 
     step "Pushing" do
       system('git push origin HEAD')
     end
+  end
+
+  def check_clean
+    # fails on CI on linux : (
+    shell! "if [[ $(git status --porcelain) ]]; then echo 'Please stash or commit changes first\n' && exit 1; fi"
   end
 end
