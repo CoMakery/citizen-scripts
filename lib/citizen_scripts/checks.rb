@@ -4,7 +4,7 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def run
-    CitizenScripts::Rspec.run
+    CitizenScripts::Test.run
 
     step "Rubocop" do
       shell! "bin/rubocop"
