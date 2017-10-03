@@ -23,4 +23,5 @@ else
   puts
   puts "Did you mean #{similar_commands.map{|c|"`#{c}`"}.join(' or ')} ?"
   puts
+  exit 1
 end
