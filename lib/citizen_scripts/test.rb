@@ -12,7 +12,13 @@ class CitizenScripts::Test < CitizenScripts::Base
     require 'bundler/setup'
 
     step "Running RSpec" do
-      command = ['bundle', 'exec', 'rspec', *argv]
+      command = [
+          'bundle',
+          'exec',
+          'rspec',
+          ('--format documentation' if ci?),
+          *argv
+      ].compact
       shell!(command.join(" "))
     end
   end

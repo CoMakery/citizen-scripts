@@ -1,4 +1,4 @@
-class CitizenScripts::Pushit < CitizenScripts::Base
+class CitizenScripts::Shipit < CitizenScripts::Base
   def self.description
     "Pulls code, runs test, pushes your code"
   end
@@ -9,7 +9,7 @@ citizen pushit
 
 Pulls the latest code, restarts, runs the tests, and pushes
 your new code up.
-EOF
+    EOF
   end
 
   def run
@@ -19,12 +19,16 @@ EOF
     check_clean
 
     step "Pushing" do
-      system('git push origin HEAD')
+      system 'git push origin HEAD'
     end
   end
 
   def check_clean
-    # fails on CI on linux : (
-    shell! "if [[ $(git status --porcelain) ]]; then echo 'Please stash or commit changes first\n' && exit 1; fi"
+    step "Check for clean git status" do
+      if `git status --porcelain`.strip.length > 0
+        colorize :error, 'Please stash or commit changes first'
+        exit 1
+      end
+    end
   end
 end

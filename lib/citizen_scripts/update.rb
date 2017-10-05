@@ -65,10 +65,7 @@ EOF
       output = `bin/rails restart`
 
       if $?.exitstatus > 0
-        puts colorize(
-          :light_red,
-          "skipping restart, not supported in this version of Rails (needs >= 5)"
-        )
+        puts colorize  :light_red, "Restart failed, skipping. (Needs Rails >= 5)"
       else
         puts output
       end
