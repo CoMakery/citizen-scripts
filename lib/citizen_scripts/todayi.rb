@@ -16,8 +16,9 @@ EOF
 
     command = %{
       git log
+        --pretty=format:%s%b
+        --reverse
         --date=local
-        --oneline
         --after="#{date_string} 00:00"
         --before="#{date_string} 23:59"
     }.gsub(/\s+/, ' ').strip

@@ -13,7 +13,7 @@ your new code up.
   end
 
   def run
-    run_script :update
+    # run_script :update  # pull --rebase errors when commit --amend applied
     check_clean
     run_script :checks
     check_clean

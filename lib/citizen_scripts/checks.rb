@@ -37,8 +37,12 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def eslint
-    step "JS Lint" do
-      shell! "yarn lint"
+    step "eslint" do
+      if ENV['CI']
+        shell! "yarn lint:ci"
+      else
+        shell! "yarn lint"
+      end
     end
   end
 
