@@ -25,9 +25,11 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def best
+    Gem::Specification::find_by_name 'rails_best_practices' # only run this step if gem is installed
     step "Rails Best Practices" do
       shell! "bundle exec rails_best_practices ."
     end
+  rescue Gem::MissingSpecError
   end
 
   def brakeman
@@ -37,11 +39,13 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def eslint
-    step "eslint" do
-      if ENV['CI']
-        shell! "yarn lint:ci"
-      else
-        shell! "yarn lint"
+    if File.exist?(app_root.join('package.json'))
+      step "eslint" do
+        if ENV['CI']
+          shell! "yarn lint:ci"
+        else
+          shell! "yarn lint"
+        end
       end
     end
   end
