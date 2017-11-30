@@ -35,7 +35,7 @@ EOF
       shell! '[[ ! -s "$(git rev-parse --git-dir)/shallow" ]] || git fetch --unshallow'
       shell! git_remotes.map { |remote| "git push --force #{remote} #{git_ref}:master" }.join(' || ')
     ensure
-      shell 7.times.map { "heroku restart --app #{heroku_app}" }.join(' || ')
+      # shell 7.times.map { "heroku restart --app #{heroku_app}" }.join(' || ')
       shell! "heroku maintenance:off --app #{heroku_app}"
     end
   end
