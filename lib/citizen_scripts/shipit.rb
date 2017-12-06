@@ -13,13 +13,14 @@ your new code up.
   end
 
   def run
+    ENV['CODE_PUSH_IN_PROGRESS'] = 'true'
     # run_script :update  # pull --rebase errors when commit --amend applied
     check_clean
     run_script :checks
     check_clean
 
     step "Pushing" do
-      system 'git push origin HEAD'
+      shell! "git push origin HEAD #{ARGV[1..-1].join(' ')}"
     end
   end
 

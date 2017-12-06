@@ -1,7 +1,7 @@
 # citizen-scripts
 
 Handy scripts for developing. Initially built for projects based on [Citizen Rails](https://github.com/citizencode/citizen-rails),
-but hopefully useful for other projects as well. 
+but hopefully useful for other projects as well.
 
 ## Installation
 
@@ -59,7 +59,7 @@ class CustomTest < CitizenScripts::Test
 
     # Adding a custom step to run eslint after RSpec runs
     step "Running eslint" do
-      system! "bin/eslint"
+      shell! "bin/eslint"
     end
   end
 end
@@ -93,7 +93,7 @@ end
 
 If you want to cherry pick some of the default checks, you'll need
 to call each of their methods manually. For a list of default checks,
-run `citizen doctor list`. Then, create a `.citizen/scripts/doctor.rb` 
+run `citizen doctor list`. Then, create a `.citizen/scripts/doctor.rb`
 file that looks something like this:
 
 ```ruby
