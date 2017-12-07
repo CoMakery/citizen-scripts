@@ -103,13 +103,30 @@ HELP
     ENV.has_key?('CI')
   end
 
-  def shell!(*args)
-    shell(*args) || abort(colorize(:error, "\n== Command #{args} failed =="))
+  def shell!(command)
+    success, output = _shell(command)
+    if success
+      return output
+    else
+      abort(colorize(:error, "\n\n===== Command #{command} failed ====="))
+    end
   end
 
-  def shell(*args)
-    puts colorize(:command, args.join(" "))
-    system(*args)
+  def shell(command)
+    _success, output = _shell(command)
+    return output
+  end
+
+  def _shell(command)
+    puts colorize :command, command
+    output = `#{command} 2>&1`
+    success = $?.success?
+    if success
+      colorize :info, output
+    else
+      colorize :error, output
+    end
+    return success, output
   end
 
   def step(name)
