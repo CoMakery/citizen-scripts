@@ -21,7 +21,7 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def rspec
-    CitizenScripts::Test.run
+    run_script :test
   end
 
   def best
@@ -51,8 +51,6 @@ class CitizenScripts::Checks < CitizenScripts::Base
   end
 
   def rubocop
-    step "Rubocop" do
-      shell! "bin/rubocop"
-    end
+    run_script :cop
   end
 end
