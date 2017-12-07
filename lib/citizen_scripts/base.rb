@@ -122,9 +122,9 @@ HELP
     output = `#{command} 2>&1`
     success = $?.success?
     if success
-      colorize :info, output
+      puts colorize :info, output
     else
-      colorize :error, output
+      puts colorize :error, output
     end
     return success, output
   end
