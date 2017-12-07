@@ -104,29 +104,27 @@ HELP
   end
 
   def shell!(command)
-    success, output = _shell(command)
-    if success
-      return output
-    else
-      abort(colorize(:error, "\n\n===== Command #{command} failed ====="))
-    end
+    success = shell command
+    abort(colorize(:error, "\n\n===== Command #{command} failed =====")) unless success
   end
 
-  def shell(command)
-    _success, output = _shell(command)
+  def shellcap(command)
+    _success, output = shell command, output: true
     return output
   end
 
-  def _shell(command)
+  def shell(command, output: false)
     puts colorize :command, command
-    output = `#{command} 2>&1`
-    success = $?.success?
-    if success
-      puts colorize :info, output
+    if output
+      command_output = `#{command} 2>&1`
+      success = $?.success?
+      puts command_output if success
     else
-      puts colorize :error, output
+      success = system command # streaming output, preferable
     end
-    return success, output
+
+    puts colorize :error, command_output unless success
+    return success, command_output
   end
 
   def step(name)
