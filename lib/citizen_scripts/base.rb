@@ -104,12 +104,12 @@ HELP
   end
 
   def shell!(command)
-    success = shell command
+    success, _ = shell command
     abort(colorize(:error, "\n\n===== Command #{command} failed =====")) unless success
   end
 
   def shellcap(command)
-    _success, output = shell command, output: true
+    _, output = shell command, output: true
     return output
   end
 
