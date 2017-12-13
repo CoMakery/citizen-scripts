@@ -1,3 +1,5 @@
+require 'rubygems'
+
 class CitizenScripts::Quality < CitizenScripts::Base
   def self.description
     "Runs code quality checks"

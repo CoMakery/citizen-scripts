@@ -1,5 +1,3 @@
-require 'rubygems'
-
 module CitizenScripts; end
 
 require_relative './citizen_scripts/colorize'
