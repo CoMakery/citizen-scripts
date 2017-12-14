@@ -36,7 +36,7 @@ class CitizenScripts::Quality < CitizenScripts::Base
 
   def brakeman
     step "Brakeman" do
-      shell! "bundle exec brakeman --exit-on-warn --quiet > /dev/null"
+      shell! "bundle exec brakeman --exit-on-warn --quiet"
     end
   end
 
